@@ -1,4 +1,5 @@
 {
     "cloudlatex.enabled": true,
-    "cloudlatex.projectId": 799197
+    "cloudlatex.projectId": 799197,
+    "cloudlatex.outDir": ""
 }
