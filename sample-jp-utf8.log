@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.141592653-p4.0.0-220214-2.6 (utf8.euc) (TeX Live 2022) (preloaded format=platex 2023.11.29)  17 JAN 2024 21:15
+This is e-pTeX, Version 3.141592653-p4.0.0-220214-2.6 (utf8.euc) (TeX Live 2022) (preloaded format=platex 2023.11.29)  17 JAN 2024 21:20
 entering extended mode
  restricted \write18 enabled.
 **sample-jp-utf8.tex
@@ -125,36 +125,6 @@ LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <20.74> not available
 
 ]
 第 1 章
-
-LaTeX Warning: Citation `Yin2023' on page 1 undefined on input line 105.
-
-
-LaTeX Warning: Citation `Farhadi2010' on page 1 undefined on input line 109.
-
-
-LaTeX Warning: Citation `Vinyals2017' on page 1 undefined on input line 109.
-
-
-LaTeX Warning: Citation `Dai2023' on page 1 undefined on input line 109.
-
-
-LaTeX Warning: Citation `Gan2022' on page 1 undefined on input line 110.
-
-
-LaTeX Warning: Citation `Devlin2019' on page 1 undefined on input line 111.
-
-
-LaTeX Warning: Citation `Vedantam2017' on page 1 undefined on input line 116.
-
-
-LaTeX Warning: Citation `Cohn-Gordon2018' on page 1 undefined on input line 116.
-
-
-LaTeX Warning: Citation `Nie2020' on page 1 undefined on input line 116.
-
-
-LaTeX Warning: Citation `Andreas2016' on page 1 undefined on input line 116.
-
 [1
 
 ] [2]
@@ -167,105 +137,148 @@ LaTeX Font Info:    Font shape `JY1/mc/b/n' in size <14.4> not available
 (Font)              Font shape `JY1/mc/bx/n' tried instead on input line 137.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <14.4> not available
 (Font)              Font shape `JY1/gt/m/n' tried instead on input line 137.
-
-LaTeX Warning: Citation `Farhadi2010' on page 3 undefined on input line 139.
-
-
-LaTeX Warning: Citation `Vinyals2017' on page 3 undefined on input line 140.
-
-
-LaTeX Warning: Citation `Xu2015' on page 3 undefined on input line 141.
-
-
-LaTeX Warning: Citation `Devlin2019' on page 3 undefined on input line 143.
-
-
-LaTeX Warning: Citation `Yin2023' on page 3 undefined on input line 144.
-
-
-LaTeX Warning: Citation `Gan2022' on page 3 undefined on input line 144.
-
-
-LaTeX Warning: Citation `Dai2023' on page 3 undefined on input line 145.
-
-
-LaTeX Warning: Citation `Radford2021' on page 3 undefined on input line 145.
-
-
-LaTeX Warning: Citation `Song2022' on page 3 undefined on input line 145.
-
-
-LaTeX Warning: Citation `Li2023' on page 3 undefined on input line 148.
-
-
-LaTeX Warning: Citation `Bubeck2023' on page 3 undefined on input line 149.
-
-
-LaTeX Warning: Citation `Fried2023' on page 3 undefined on input line 159.
-
-
-LaTeX Warning: Citation `Frank2012' on page 3 undefined on input line 160.
-
-
-LaTeX Warning: Citation `Goodman2016' on page 3 undefined on input line 160.
-
 [3
 
-]
-
-LaTeX Warning: Citation `Fried2017' on page 4 undefined on input line 164.
-
-
-LaTeX Warning: Citation `Williams2015' on page 4 undefined on input line 165.
-
-
-LaTeX Warning: Citation `Vedantam2017' on page 4 undefined on input line 169.
-
-
-LaTeX Warning: Citation `Cohn-Gordon2018' on page 4 undefined on input line 169.
-
-
-LaTeX Warning: Citation `Nie2020' on page 4 undefined on input line 169.
-
-
-LaTeX Warning: Citation `Andreas2016' on page 4 undefined on input line 170.
-
-[4]
+] [4]
 第 3 章
 LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 180.
 (/usr/local/texlive/2022/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
 File: sample.eps Graphic file (type eps)
- <sample.eps> [5
+ <sample.eps>
+
+LaTeX Warning: Citation `okumura2010' on page 5 undefined on input line 238.
+
+
+LaTeX Warning: Citation `yoshinaga2009' on page 5 undefined on input line 238.
+
+
+LaTeX Warning: Citation `ware2004' on page 5 undefined on input line 242.
+
+
+LaTeX Warning: Citation `meyer2009' on page 5 undefined on input line 243.
+
+
+LaTeX Warning: Citation `hill2010' on page 5 undefined on input line 244.
+
+[5
 
 ] [6] [7
 
-]
-LaTeX Font Info:    Kanji font shape `JY1/mc/m/it' undefined
-(Font)              No change on input line 286.
-LaTeX Font Info:    Kanji font shape `JY1/mc/m/it' undefined
-(Font)              No change on input line 292.
+] (./sample-jp-utf8.bbl
+LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
+(Font)              No change on input line 6.
+LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
+(Font)              No change on input line 12.
+LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
+(Font)              No change on input line 19.
+LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
+(Font)              No change on input line 26.
+LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
+(Font)              No change on input line 33.
+LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
+(Font)              No change on input line 39.
+LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
+(Font)              No change on input line 52.
+LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
+(Font)              No change on input line 59.
  [8
 
-] (./sample-jp-utf8.aux)
+]
+LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
+(Font)              No change on input line 65.
+LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
+(Font)              No change on input line 73.
+LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
+(Font)              No change on input line 82.
+LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
+(Font)              No change on input line 89.
+LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
+(Font)              No change on input line 104.
+LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
+(Font)              No change on input line 110.
+LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
+(Font)              No change on input line 116.
+LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
+(Font)              No change on input line 121.
+LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
+(Font)              No change on input line 126.
+LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
+(Font)              No change on input line 133.
+ [9]) [10] (./sample-jp-utf8.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 1139 strings out of 476707
- 19596 string characters out of 5805610
+ 1160 strings out of 476707
+ 19864 string characters out of 5805610
  1851209 words of memory out of 5000000
- 21620 multiletter control sequences out of 15000+600000
+ 21638 multiletter control sequences out of 15000+600000
  527035 words of font info for 83 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
  55i,8n,62p,477b,329s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on sample-jp-utf8.dvi (12 pages, 24432 bytes).
+Output written on sample-jp-utf8.dvi (14 pages, 30144 bytes).
 
+This is pBibTeX, Version 0.99d-j0.34 (utf8.euc) (TeX Live 2022)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: sample-jp-utf8.aux
+The style file: junsrt.bst
+Database file #1: reference.bib
+Warning--I didn't find a database entry for "okumura2010"
+Warning--I didn't find a database entry for "yoshinaga2009"
+Warning--I didn't find a database entry for "ware2004"
+Warning--I didn't find a database entry for "meyer2009"
+Warning--I didn't find a database entry for "hill2010"
+Warning--empty journal in Vedantam2017
+Warning--empty journal in Li2023
+You've used 20 entries,
+            2270 wiz_defined-function locations,
+            674 strings with 9088 characters,
+and the built_in function-call counts, 8424 in all, are:
+= -- 654
+> -- 335
+< -- 23
++ -- 125
+- -- 105
+* -- 451
+:= -- 1024
+add.period$ -- 60
+call.type$ -- 20
+change.case$ -- 20
+chr.to.int$ -- 0
+cite$ -- 22
+duplicate$ -- 494
+empty$ -- 745
+format.name$ -- 210
+if$ -- 2068
+int.to.chr$ -- 0
+int.to.str$ -- 20
+missing$ -- 20
+newline$ -- 103
+num.names$ -- 20
+pop$ -- 142
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 433
+stack$ -- 0
+substring$ -- 534
+swap$ -- 189
+text.length$ -- 23
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 2
+while$ -- 63
+width$ -- 22
+write$ -- 215
+is.kanji.str$ -- 281
+(There were 7 warnings)
 
 sample-jp-utf8.dvi -> sample-jp-utf8.pdf
-[1][2][3][4][5][6][7][8][9][10][11][12]
-161369 bytes written
+[1][2][3][4][5][6][7][8][9][10][11][12][13][14]
+164327 bytes written
 
