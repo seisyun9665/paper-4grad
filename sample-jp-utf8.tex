@@ -15,7 +15,9 @@
 %% 推奨： graphicx パッケージ（本ファイルではこれを使用）
 %%	動かない場合にいは \usepackage[dvipdfmx]{graphicx} のように dvi 変換コマンドを明示指定する。
 %%
-\usepackage{graphicx} % for \includegraphics[width=3cm]{sample.eps}
+% \usepackage{graphicx} % for \includegraphics[width=3cm]{sample.eps}
+\usepackage[dvipdfm]{graphicx} % 画像の挿入に必要
+\usepackage{float} % 図の位置の強制指定に必要
 %% 一応 OK (epsfig.sy)
 % \usepackage{epsfig} % for \psfig{file=sample.eps,width=3cm}
 %% 以下の２つの使用はあまり勧められない (epsf.sty, epsfbox.sty)
@@ -23,6 +25,14 @@
 %\usepackage{epsbox} % for \epsfile{file=sample.eps,scale=0.6}
 
 \usepackage{times} % use Times Font instead of Computer Modern
+\usepackage{mdframed}
+\usepackage{latexsym} % 数式で使える記号を増やす
+\usepackage{amsmath} % 数式の記述環境
+\usepackage{fancyhdr} % ヘッダとフッタの設定に必要
+\usepackage{algorithm,algpseudocode} % 疑似コードの記述に必要
+\usepackage{array}
+\usepackage{booktabs} % For formal tables
+
 
 \setcounter{tocdepth}{3}	% 目次を3レベル (1.2.3) まで
 \setcounter{secnumdepth}{3}	% 番号付けレベル。 3: \section まで 4: \subsubsection まで
@@ -170,6 +180,180 @@ SAILデータセットを用いた評価により，語用論的アプローチ�
 Andreasら\cite{Andreas2016}は，画像の参照ゲームにおいて，聞き手の誤解を低減するようなキャプションを生成する手法を提案した．
 これらの手法は，ニューラルネットワークでモデル化された話し手と聞き手の学習を伴うことから，近年極めて高い品質を達成している大規模事前学習済みモデルを活用することが難しい．
 本研究では，大規模事前学習済みモデルを再学習することなく用いる語用論的アプローチによって，誤解可能性を考慮した画像情報ラベリングを実現する手法を検討する．
+
+%提案手法
+\chapter{提案手法}
+
+\section{問題設定}
+
+本研究では，画像の集合が入力されたときに，それぞれの画像を，人が一意に誤解なく特定できるラベルを生成する問題に取り組む．
+
+n枚の画像の集合を\(X = \{x_1, x_2, \ldots, x_n\}\)とする．\(X\)に対して付与されるラベルの集合を\(Y = \{y_1, y_2, \ldots, y_n\}\)とする．ラベル\(y_1, y_2, \ldots, y_n\)は画像\(x_1, x_2, \ldots, x_n\)にそれぞれ対応しており，各ラベルは対応する画像の特徴を説明するものとする．
+
+ここで，ラベル\(y_r\)（$r \in [1..n]$）と\(X\)を被験者に与えたとき，被験者が\(y_r\)に対応する画像\(x_r\)を選択しようとして，\(x_r\)以外を選択してしまう確率を誤解可能性\(p\)とする．
+
+提案手法では，\(p\)が最小となるラベルの組み合わせ\(Y\)を生成することを目的とする．
+
+
+\section{話し手モデルと聞き手モデル}
+
+本研究の手法では，語用論的アプローチに基づき問題解決を図る．
+
+語用論とは，話し手と聞き手が互いの意図を理解する過程を研究する学問であり，皮肉表現や比喩表現などを研究対象とする．
+
+本研究での語用論的アプローチは，話し手モデルと聞き手モデルの対話を通じて，問題への回答を改善していく．
+
+話し手モデルは，画像を詳細かつ正確に説明するラベルを生成することに重点を置く．この過程では，画像の特徴や意味内容を考慮し，誤解を引き起こす可能性のある曖昧な表現を避けることが重要である．一方，聞き手モデルは，生成されたラベルがどの程度誤解を招く可能性があるかを評価する．このモデルは，ラベルが提供する情報が明確で，かつ他のラベルとの誤解が起きないかどうかを評価し，話し手モデルに対してフィードバックを行う．
+\subsection{話し手モデルと聞き手モデルの役割}
+
+\begin{itemize}
+  \item 話し手モデル：画像を説明するラベルを生成し，その改善を行う．
+  \item 聞き手モデル：生成されたラベルに対する誤解可能性を評価し，各画像を誤解なく選択できるかを判断する．
+\end{itemize}
+
+
+% \section{ベースライン（ChatGPT手法）}
+% プロンプトの説明中心
+\section{Pragmatic ChatGPT（PCG）手法}
+
+PCGでは，話し手モデルと聞き手モデルの両方をChatGPTを用いて実装し，ラベル生成を行う．
+
+この手法では，以下のステップでラベルを生成し，繰り返し改善を図る．このステップでは，1，3が話し手モデル，2が聞き手モデルの役割を担っている．
+
+\begin{enumerate}
+  \item ChatGPTに対して画像の集合Xを入力する．Xに含まれる各画像に対して，それぞれ誤解なく画像を区別できるラベルを出力するように，プロンプトを入力する．ここで出力されたラベルの集合をY1とする．
+  \item ラベルの集合Y1と画像の集合XをChatGPTに入力する．Y1に含まれる各ラベルについて誤解可能性を分析し，ラベル改善のヒントを出力するように，プロンプトを入力する．出力されたラベル改善のヒントをH1とする．
+  \item ChatGPTに対して画像の集合X，ラベル改善のヒントH1，ラベルの集合Y1を入力する．H1を参考にして，Y1を改善した新たなラベルを出力するように，プロンプトを入力する．ここで出力されたラベルの集合をY2とする．
+  \item 2と3を繰り返して，最終的に得られたラベルの集合Ym（mは任意の自然数）を，誤解可能性の低いラベルとして提出する．
+\end{enumerate}
+
+各モデルごとに行っている処理を以下に示す．
+
+\begin{itemize}
+  \item 話し手モデル（生成モデル）
+    \begin{itemize}
+      \item 初期ラベル生成：Xに含まれる各画像に対応するラベルY1を出力する．
+      \item 改善ラベル生成：聞き手モデルによって出力されたヒントHと，X，Y1から，Y1を改善したラベルY2を出力する．
+    \end{itemize}
+  \item 聞き手モデル
+    \begin{itemize}
+      \item ヒント生成：XとY1から，ラベル改善のヒントHを出力する
+    \end{itemize}
+\end{itemize}
+
+なお，出力するラベルの長さに制限をかける場合は，ラベル出力処理を行っている部分のプロンプトに以下を追加する．この例では10単語以内でラベルを出力するように指定している．
+
+\begin{figure}[H]
+	\begin{mdframed}[linewidth=1pt]
+	Tray ceiling Recessed lighting, Beige wall paint, ..., Decorative straw hats on wall, Distressed wood mirror frame
+	\end{mdframed}
+	\caption{プロンプトの例}
+	\label{fig:baseline_prompt}
+\end{figure}
+	
+% プロンプトとその組み合わせ，サイクルの説明
+
+\section{特徴量に基づく組み合わせ最適化手法}
+\subsection{全体の流れ}
+特徴量に基づく組合せ最適化手法（FCO）では，画像から特徴を表す単語群を生成し，これを基に最適なラベルを導き出していく．このプロセスは，話し手モデルと聞き手モデルの相互作用によって実現される．
+以上の処理の流れをまとめた図を図\ref{fig:cof_flow_example}に示す．
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=3.5in]{figures/COF_flow.jpg}
+  \caption{ラベル生成の流れ}
+  \label{fig:cof_flow_example}
+\end{figure}
+
+\subsection{特徴群生成とラベル生成}
+初めに，話し手モデル（ChatGPT-4）に画像群$X$を入力し，各画像から特徴を表す単語群$Z$を生成する．特徴群$Z$の例は図\ref{fig:feature_group}に示す．この際，各画像からは50個の特徴$z$が得られる．次に，これらの特徴群$Z$からランダムに特徴を選び，組み合わせてラベル$y$を生成する．これを画像群$X$全体で行い，ラベル集合$Y_1$を作成する．
+
+\begin{figure}[H]
+\begin{mdframed}[linewidth=1pt]
+Tray ceiling Recessed lighting, Beige wall paint, ..., Decorative straw hats on wall, Distressed wood mirror frame
+\end{mdframed}
+\caption{部屋X1の特徴群Z1}
+\label{fig:feature_group}
+\end{figure}
+
+続いて，聞き手モデルに$Y_1$と$X$を入力する．このモデルは，各ラベルの誤解可能性を分析し，最も誤解性が高いラベル組をヒント$H_1$として出力する．
+\subsection{ゼロショット画像分類}
+生成されたラベルの誤解可能性を評価するため，ゼロショット画像分類を実施する．このプロセスでは，生成されたラベル群$Y_1$と単一の画像$x_1$を入力として与える．ゼロショット画像分類を適用し，画像$x_1$が各ラベルに属する確率を確率分布として出力する．
+この手順は画像$x_1$から$x_n$に至るまで同様に行われる．
+実際にゼロショット分類をした際の結果を図\ref{fig:zeroshot_result}に示す．
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{figures/zeroshot_result.png}
+  \caption{ゼロショット分類の結果}
+  \label{fig:zeroshot_result}
+\end{figure}
+\subsection{F1スコア計算}
+ラベルセットの誤解可能性はゼロショット画像分類の結果を用いて計算されたF1スコアで評価される．
+ゼロショット画像分類を行ったときに，$i$番目の画像に対して，$j$番目のラベルに与えられた確率を$p_{i,j}$とすると，ラベル$j$の適合率は$\frac{p_{j,j}}{\sum_i(p_{i,j})}$，再現率は$p_{j,j}$である．
+
+ラベル$j$のF1スコアは，ラベル$j$の適合率と再現率の調和平均で求められる．そして全ラベル$Y$に対してそれぞれF1スコアを求め，全F1スコアの平均をラベルの性能とする．
+\subsection{誤解性の高いラベルペア判定}
+ゼロショット画像分類の結果を分析して改善すべきラベルのペアを特定する過程では，画像$x_k$を説明したラベル$y_k$とし，$x_k$以外の画像の中で$y_k$への所属確率が最も高いものを$y_1$から$y_n$で取得する．自分の画像以外の画像の所属確率が最も高いラベルと，最も高い画像の真の正解ラベルを改善ペアとして出力する．このペアは，ゼロショット分類において最も誤解されやすい，つまり最も性能が低いと判断されるラベルと，そのラベルが誤って関連付けられた画像の正しいラベルである．
+\subsection{聞き手モデルから受け取ったヒントをもとにラベルを改善}
+次に，話し手モデルに$H_1$を入力し，$Y_1$を改善した新たなラベル集合$Y_2$を生成する．この際，画像とテキストのペアを大規模に学習することで，画像の内容を説明するテキストとの類似度を計算できるモデルであるCLIP（Contrastive Language–Image Pre-training）を使用する．CLIPは，画像とテキストの両方を同じ空間に埋め込むことで，その類似度を測定する．ここでの類似度は画像とラベルの特徴の重要度として扱う．各特徴と画像との重要度の例は表\ref{tab:similarity_examples}に示す．
+
+\begin{table}[ht]
+\centering
+\caption{各特徴と画像との重要度の具体例}
+\label{tab:similarity_examples}
+\begin{tabular}{@{}lr@{}}
+\toprule
+特徴 & 重要度 \\ \midrule
+Tray ceiling Recessed lighting & 28.051437 \\
+Two-tone wood flooring & 25.21447 \\
+White ceiling & 25.036436 \\
+\addlinespace % Adds some space before the dots
+\multicolumn{2}{c}{\dots} \\ % Centered dots to indicate omitted data
+\addlinespace % Adds some space after the dots
+Mountainous landscape view & 17.63242 \\
+Glass vase with white flowers & 17.470116 \\
+Striped throw on the bed & 16.694729 \\ \bottomrule
+\end{tabular}
+\end{table}
+
+
+与えられた改善すべき2つのラベルセット（\texttt{current\_label1}と\texttt{current\_label2}）に対して，それぞれのラベルセットが表す画像（\texttt{image1}と\texttt{image2}）との重要度を参考にしながら改善する処理を行う．以下にその処理をステップごとに説明する．
+
+\begin{enumerate}
+    \item \textbf{current\_label1 vs image1}\\
+    \texttt{current\_label1}の中から，\texttt{image1}との類似度が最も低いラベルを確率的に選択．これは，類似度の逆数をソフトマックス関数にかけることで確率分布を作成し，その分布に基づいてランダムに選択することで行う．
+    \item \textbf{all\_label1 vs image1}\\
+    \texttt{all\_label1}の中から\texttt{current\_label1}に含まれていないラベルを対象に，\texttt{image1}との類似度が高いラベルから確率的に選択する．
+    \item \textbf{current\_label1 vs image2}\\
+    \texttt{current\_label1}の中から，\texttt{image2}との類似度が高いラベルを確率的に選択．これは，類似度をソフトマックス関数にかけることで確率分布を作成し，その分布に基づいてランダムに選択することで行う．
+    \item \textbf{all\_label1 vs image2}\\
+    \texttt{all\_label1}の中から\texttt{current\_label1}に含まれていないラベルを対象に，\texttt{image2}との類似度が低いラベルを確率的に選択する．
+    \item \textbf{ラベルの入れ替え}\\
+    \texttt{current\_label1}からステップ1で選んだラベルとステップ4で選んだラベルを除外し，ステップ2と3で選んだラベルを追加して新しいラベルセット\texttt{new\_label1}を作成する．
+    \item \textbf{重複の削除}\\
+    最後に，\texttt{new\_label1}と\texttt{new\_label2}から重複しているラベルを削除する．これにより，各ラベルセットがユニークなラベルのみを含むようになる．
+    \item \textbf{curent\_label2でも同様の処理をしてnew\_label2を作成する．}
+    \item \textbf{改善されたラベルセットの返却}\\
+    処理を経て改善された\texttt{new\_label1}と\texttt{new\_label2}を関数の出力として返却する．
+\end{enumerate}
+これにより，\texttt{current\_label1}と\texttt{current\_label2}はそれぞれの画像に対する識別性が改善され，画像とラベルの関連性が高まるように調整される．
+このプロセスを繰り返し，ラベル集合$Y_m$を誤解可能性が低くなるように改善していく．
+最終的に，全試行の中で最も平均F1スコアが高い時のラベル組み合わせを出力する．
+全試行内の平均F1スコアが以下の図\ref{fig:f1_score}の場合，赤丸の時のラベルセットを最終的な出力とする．
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{figures/f1_score.png}
+  \caption{200回試行内のF1スコアの推移}
+  \label{fig:f1_score}
+\end{figure}
+この手法では，話し手モデルが特徴群の生成，特徴の組み合わせによるラベル生成，ヒントに基づくラベルの改善を担い，聞き手モデルが各画像の選択の正確性評価，ラベルの誤解可能性の分析，改善すべきラベル組のヒント出力を行う．この相互作用により，画像に対する最適なラベルを効果的に生成することを試みる．
+
+\section{特徴量に基づく組み合わせ最適化手法(New)}
+本節では，LLMに直接ラベルを生成させるのではなく，画像情報の特徴を列挙させ，そのうちのいくつかを選択してラベルを構成する提案手法について述べる．
+提案手法は，聞き手がラベルを解釈し，指し示している画像の候補を絞り込む過程を明示的に考慮する．
+
+画像 $x_i$ に対して，特徴量 $Z_i = \{z_1, \ldots, z_m\}$ を生成させる．$m$ は1枚の画像情報あたりの特徴量の数である．例えば，図xの部屋であれば，$z_1 = \text{'red bed'}$, $z_2 = \text{'...'}$ など
+
 
 \chapter{形式}
 
