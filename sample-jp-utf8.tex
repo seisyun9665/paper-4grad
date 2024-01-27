@@ -275,28 +275,43 @@ PCGの重要な点：ラベルの誤解可能性を聞き手モデルが評価�
 
 PCGにおける，ラベル改善処理の流れを以下の図PFGflowに示す．ラベル改善フローの説明
 
-図PCGのラベル改善フロー
-あPCGflow
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{figures/PCGflow.png}
+	\caption{ラベル改善フロー}
+	\label{fig:PCGflow}
+\end{figure}
 
 図PFGflowにおける、話し手モデル1（初期ラベル生成フロー）の処理の流れを図PCGspeaker1に示す。
 話し手モデル1の説明
 
- 話し手モデル1（初期ラベル生成フロー）
- PCGspeaker1
-
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{figures/PCGspeaker1.png}
+	\caption{話し手モデル1（初期ラベル生成フロー）}
+	\label{fig:PCGspeaker1}
+\end{figure}
 
 次に聞き手モデル（ヒント生成フロー）の処理の流れを図PCGlistenerに示す。
 聞き手モデルの説明。
 
- 聞き手モデル（ヒント生成フロー）
- PCGlistener
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{figures/PCGlistener.png}
+	\caption{聞き手モデル（ヒント生成フロー）}
+	\label{fig:PCGlistener}
+\end{figure}
 
 
 最後に話し手モデル2（ラベル改善フロー）の処理の流れを図PCGspeaker2に示す。
 話し手モデル2の説明。
 
- 話し手モデル2（ラベル改善フロー）
- PCGspeaker2
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{figures/PCGspeaker2.png}
+	\caption{話し手モデル２（ラベル改善フロー）}
+	\label{fig:PCGspeaker2}
+\end{figure}
 
 画像の集合をX、n回目の改善サイクルにおけるラベルをYn、n回目の改善サイクルにおけるヒントをH、
 改善サイクルを回す回数をmとして、
