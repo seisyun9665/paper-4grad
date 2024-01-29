@@ -48,6 +48,24 @@
 \setlength{\parskip}{0em}
 \setlength{\topsep}{0em}
 
+\definecolor{promptcolor}{rgb}{0.36, 0.54, 0.66}
+\definecolor{responsecolor}{rgb}{0.0, 0.5, 0.0}
+
+\lstdefinestyle{chatgptstyle}{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    columns=flexible,
+    backgroundcolor=\color{white},
+    moredelim=[is][\textcolor{promptcolor}]{<<}{>>},
+    moredelim=[is][\textcolor{responsecolor}]{[[}{]]},
+}
+
 %% タイトル生成用パッケージ(重要)
 \usepackage{mast-jp-utf8}
 
@@ -298,6 +316,37 @@ PCGにおけるラベル改善処理のプロセスを図\ref{fig:PCGflow}に示
 	\label{fig:PCGspeaker1}
 \end{figure}
 
+話し手モデル１で行っている，初期ラベルを生成する処理を行うChatGPTプロンプトを図\ref{fig:prompt_speaker1}に示す．
+
+
+\begin{figure}[h]
+  \centering
+  \begin{mdframed}
+  \begin{lstlisting}[style=chatgptstyle]
+    [[Prompt: Now input 10 images. For each group of images you have entered, output a sentence that captures three characteristics of the images, one sentence for each image, so that each image can be distinguished. Never output in any format other than the specified format. The output format should be as follows. 1.[Caption for image 1] 2.[Caption for image 2] ~~ 10.[Caption for image 10] Example: 1. A living room, white walls, wallpaper with pink and black.]]
+
+    <<Responce: Please upload the 10 images you'd like me to analyze.>>
+
+    [[Prompt: {Image URLs}]]
+  \end{lstlisting}
+  \end{mdframed}
+  \caption{初期ラベル生成プロンプト．画像10枚が入力され，各画像を区別するようにラベルを生成する．
+  出力は"1.[Caption for image 1] 2.[Caption for image 2] ~~ 10.[Caption for image 10]"の形式で行われる．}
+  \label{fig:prompt_speaker1}
+\end{figure}
+
+出力されるラベル例を図\ref{fig:firstlabel_example}に示す．
+
+\begin{figure}[H]
+  \begin{mdframed}[linewidth=1pt]
+    1. A bedroom with large windows offering a view, a cozy sitting area, and a neutral color palette.
+  \end{mdframed}
+  \caption{出力されるラベルの例}
+  \label{fig:firstlabel_example}
+\end{figure}
+
+
+
 次に図\ref{fig:PCGflow}における聞き手モデル（ヒント生成フロー）の処理の流れを図\ref{fig:PCGlistener}に示す．
 聞き手モデルは，入力された画像の集合と，話し手モデルによって生成されたラベルから，
 各ラベルの誤解可能性について評価を行い，ラベルの改善に役立つヒントを出力する．
@@ -316,12 +365,34 @@ PCGにおけるラベル改善処理のプロセスを図\ref{fig:PCGflow}に示
 そのような場合，そのラベルの組の誤解可能性が高いとして，
 改善すべきラベル組はラベル1とラベル3である，といったようにラベル改善のヒントを出力する．
 
-具体的には以下の形式で出力を行う．
-\begin{eqnarray}
-  ラベルAとラベルB:（ラベルAとラベルB間で誤解可能性が高くなる要因）  
-\end{eqnarray}
+聞き手モデルで行っている，ラベル改善のヒントを生成する処理を行うChatGPTプロンプトを図\ref{fig:prompt_listener}に示す．
 
-実際に出力されるヒントの例を図\ref{fig:hint_example}に示す．
+\begin{figure}[h]
+  \centering
+  \begin{mdframed}
+  \begin{lstlisting}[style=chatgptstyle]
+    [[Prompt: Now enter 10 images and 10 captions corresponding to each image with 10 sentences.For each input image and caption group, verify that each caption can distinguish each image without misunderstanding. Then, output the combination of captions that you think is most likely to cause misunderstanding in the form of [Caption 1 and Caption 2]. The input format is as follows. 10 image files: to be entered later. Caption 10 sentences: [caption number]. [Caption text]. As an example, the following will be input. 1. red bed room, white curtains, yellow modern lamps 2. ~~ omitted ~~ 10. red bed room, blue chairs, red wall.  Output format to be described later]]
+
+    <<Responce: Please enter 10 pairs of image files and their corresponding captions. For each image, we will review the potentially misleading captions and identify the most confusing caption combinations. Once you have provided us with the images and captions, we will begin our analysis.>>
+
+    [[Prompt: {Image URLs}]]
+
+    <<Responce: To proceed with the analysis, please provide the captions for each image. Once I have the captions, I will be able to review them in the context of the images and identify any potential for confusion.>>
+
+    [[Prompt: 
+    {labels}
+
+    These are the captions for each image. Never output in any format other than the specified format. Output should be in accordance with the following output format. hint 1. [caption n] and [caption n]: [reference to possible misunderstanding]. hint2. [caption n] and [caption n]: [reference to possible misunderstanding]. ~~ hint n. [caption n] and [caption n]: [reference to possible misunderstanding]. Example: hint 1. Caption 1 and Caption 10: Both highlight colors (pink and red) and may refer to the art piece.
+    
+    ]]
+  \end{lstlisting}
+  \end{mdframed}
+  \caption{ラベル改善のヒントを生成する処理を行うプロンプト．10枚の画像と10文のラベルが入力され，語解の原因となるラベルの組み合わせを出力する．
+  出力は"1. [caption n] and [caption n]: [reference to possible misunderstanding]. hint2. [caption n] and [caption n]: [reference to possible misunderstanding]. ~~ hint n. [caption n] and [caption n]: [reference to possible misunderstanding]."の形式で行われる．}
+  \label{fig:prompt_listener}
+\end{figure}
+
+出力されるヒントの例を図\ref{fig:hint_example}に示す．
 
 \begin{figure}[H]
   \begin{mdframed}[linewidth=1pt]
@@ -342,6 +413,43 @@ PCGにおけるラベル改善処理のプロセスを図\ref{fig:PCGflow}に示
 	\includegraphics[width=0.8\linewidth]{figures/PCGspeaker2.png}
 	\caption{話し手モデル２（ラベル改善フロー）}
 	\label{fig:PCGspeaker2}
+\end{figure}
+
+話し手モデル２で行っている，ヒントに基づいて改善したラベルを生成する処理を行うChatGPTプロンプトを図\ref{fig:prompt_speaker2}に示す．
+
+\begin{figure}[h]
+  \centering
+  \begin{mdframed}
+  \begin{lstlisting}[style=chatgptstyle]
+    [[Prompt: 
+    Now enter 10 images and 10 captions corresponding to each image.In addition, enter a hint referring to possible misunderstandings about each caption.For each group of images you have entered, improve the captions based on the hints and output one sentence for each image, capturing three characteristics of each image that distinguish each image.Input 10 images, 10 caption sentences, and the hints in that order.
+    ]]
+
+    <<Responce: 
+    Understood. Please enter the 10 images, a caption for each, and a hint to prevent misunderstandings about each caption in order. We will then provide improved captions that capture the characteristics of each image based on the hints.
+    >>
+
+    [[Prompt: {Image URLs}]]
+
+    <<Responce: 
+    Continue by providing a caption for each image and tips to prevent misunderstandings about that caption. Based on this information, create an improved caption that captures three features of the image.
+    >>
+
+    [[Prompt: First, the captions corresponding to each image are as follows.
+
+    {labels}
+
+    Never output in any format other than the specified format. Output should be in accordance with the following output format. hint 1. [caption n] and [caption n]: [reference to possible misunderstanding]. hint2. [caption n] and [caption n]: [reference to possible misunderstanding]. ~~ hint n. [caption n] and [caption n]: [reference to possible misunderstanding]. Example: hint 1. Caption 1 and Caption 10: Both highlight colors (pink and red) and may refer to the art piece. Below are some tips on misconceptions to avoid." + 
+
+    {hints}
+
+    Based on these tips, improve the original caption so that the caption captures three features of each image that distinguish each image. Never output in any format other than the specified format. The output format should be as follows. 1.[Caption for image 1] 2.[Caption for image 2] ~~ 10.[Caption for image 10] Example: 1. Example: 1. A living room with wood floors, white walls and ceiling, and wallpaper with pink and black patterns.
+    ]]
+  \end{lstlisting}
+  \end{mdframed}
+  \caption{ヒントに基づいて改善したラベルを生成する処理を行うプロンプト．10枚の画像，10文のラベル，ラベル改善のヒントが入力され，ヒントに基づいて改善を行ったラベルを10文出力する．
+  出力は"1.[Caption for image 1] 2.[Caption for image 2] ~~ 10.[Caption for image 10]"の形式で行われる．}
+  \label{fig:prompt_speaker2}
 \end{figure}
 
 画像の集合をX，n回目の改善サイクルにおけるラベルをYn，n回目の改善サイクルにおけるヒントをH，
