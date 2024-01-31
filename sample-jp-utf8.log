@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.141592653-p4.0.0-220214-2.6 (utf8.euc) (TeX Live 2022) (preloaded format=platex 2023.11.29)  31 JAN 2024 12:52
+This is e-pTeX, Version 3.141592653-p4.0.0-220214-2.6 (utf8.euc) (TeX Live 2022) (preloaded format=platex 2023.11.29)  31 JAN 2024 13:07
 entering extended mode
  restricted \write18 enabled.
 **sample-jp-utf8.tex
@@ -457,47 +457,47 @@ File: figures/PCGflow.png Graphic file (type bmp)
  [6]
 File: figures/PCGspeaker1.png Graphic file (type bmp)
 <figures/PCGspeaker1.png>
-LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 355.
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 353.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
 Package mdframed Info: mdframed inside float 
- mdframed uses option nobreak mdframed on input line 362.
+ mdframed uses option nobreak mdframed on input line 360.
 Package mdframed Info: mdframed inside a box 
- mdframed uses option nobreak mdframed on input line 362.
+ mdframed uses option nobreak mdframed on input line 360.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 Package mdframed Info: mdframed inside float 
- mdframed uses option nobreak mdframed on input line 373.
+ mdframed uses option nobreak mdframed on input line 371.
 Package mdframed Info: mdframed inside a box 
- mdframed uses option nobreak mdframed on input line 373.
+ mdframed uses option nobreak mdframed on input line 371.
 [7]
 File: figures/PCGlistener.png Graphic file (type bmp)
 <figures/PCGlistener.png>
 Package mdframed Info: mdframed inside float 
- mdframed uses option nobreak mdframed on input line 419.
+ mdframed uses option nobreak mdframed on input line 417.
 Package mdframed Info: mdframed inside a box 
- mdframed uses option nobreak mdframed on input line 419.
+ mdframed uses option nobreak mdframed on input line 417.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 Package mdframed Info: mdframed inside float 
- mdframed uses option nobreak mdframed on input line 430.
+ mdframed uses option nobreak mdframed on input line 428.
 Package mdframed Info: mdframed inside a box 
- mdframed uses option nobreak mdframed on input line 430.
+ mdframed uses option nobreak mdframed on input line 428.
 [8]
 File: figures/PCGspeaker2.png Graphic file (type bmp)
 <figures/PCGspeaker2.png>
 Package mdframed Info: mdframed inside float 
- mdframed uses option nobreak mdframed on input line 479.
+ mdframed uses option nobreak mdframed on input line 477.
 Package mdframed Info: mdframed inside a box 
- mdframed uses option nobreak mdframed on input line 479.
+ mdframed uses option nobreak mdframed on input line 477.
 
 
-LaTeX Warning: Float too large for page by 128.12035pt on input line 483.
+LaTeX Warning: Float too large for page by 128.12035pt on input line 481.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -510,17 +510,17 @@ File: figures/flow.png Graphic file (type bmp)
 
 ]
 LaTeX Font Info:    Font shape `JT1/mc/b/n' in size <12> not available
-(Font)              Font shape `JT1/mc/bx/n' tried instead on input line 535.
+(Font)              Font shape `JT1/mc/bx/n' tried instead on input line 533.
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <12> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 535.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 533.
 LaTeX Font Info:    Font shape `JY1/mc/b/n' in size <12> not available
-(Font)              Font shape `JY1/mc/bx/n' tried instead on input line 535.
+(Font)              Font shape `JY1/mc/bx/n' tried instead on input line 533.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <12> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 535.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 533.
 File: figures/panorama.jpeg Graphic file (type bmp)
 <figures/panorama.jpeg>
  [14]
-LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 569.
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 567.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 ) [15]
@@ -528,17 +528,17 @@ File: figures/amt.png Graphic file (type bmp)
 <figures/amt.png>
  [16]
 Package mdframed Info: mdframed inside float 
- mdframed uses option nobreak mdframed on input line 612.
+ mdframed uses option nobreak mdframed on input line 610.
 Package mdframed Info: mdframed inside a box 
- mdframed uses option nobreak mdframed on input line 612.
+ mdframed uses option nobreak mdframed on input line 610.
 Package mdframed Info: mdframed inside float 
- mdframed uses option nobreak mdframed on input line 627.
+ mdframed uses option nobreak mdframed on input line 625.
 Package mdframed Info: mdframed inside a box 
- mdframed uses option nobreak mdframed on input line 627.
+ mdframed uses option nobreak mdframed on input line 625.
 Package mdframed Info: mdframed inside float 
- mdframed uses option nobreak mdframed on input line 643.
+ mdframed uses option nobreak mdframed on input line 641.
 Package mdframed Info: mdframed inside a box 
- mdframed uses option nobreak mdframed on input line 643.
+ mdframed uses option nobreak mdframed on input line 641.
  [17] [18] [19]
 第 5 章
 [20
@@ -584,13 +584,13 @@ LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
 Here is how much of TeX's memory you used:
  6706 strings out of 476707
  109963 string characters out of 5805610
- 2341209 words of memory out of 5000000
+ 2342209 words of memory out of 5000000
  27010 multiletter control sequences out of 15000+600000
  533521 words of font info for 107 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
  82i,8n,90p,713b,1453s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on sample-jp-utf8.dvi (28 pages, 176676 bytes).
+Output written on sample-jp-utf8.dvi (28 pages, 176196 bytes).
 
 This is pBibTeX, Version 0.99d-j0.34 (utf8.euc) (TeX Live 2022)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
@@ -650,5 +650,5 @@ is.kanji.str$ -- 319
 
 sample-jp-utf8.dvi -> sample-jp-utf8.pdf
 [1][2][3][4][5][6][7][8][9][10][11][12][13][14][15][16][17][18][19][20][21][22][23][24][25][26][27][28]
-8765341 bytes written
+8764863 bytes written
 
